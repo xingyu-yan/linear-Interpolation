@@ -8,7 +8,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from stage.LRfuncs import computeCost, gradientDescent
+from LRfuncs import computeCost, gradientDescent 
+# This two functions are from the linear regration 
 
 # Loading data
 print("Loading Data ...\n")
@@ -22,7 +23,7 @@ print(newTable.shape)
 print(newTable[0,:])
     
 X = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-
+# There are 15 year in total 
 numberNotV = 0
 for i in range(15):    
     newY = newTable[1,i] 
@@ -30,7 +31,6 @@ for i in range(15):
         numberNotV += 1
 newX = np.zeros(numberNotV) 
 newY = np.zeros(numberNotV) 
-print(newX) 
 
 tNotV = 0  
 tV = 0
@@ -47,20 +47,14 @@ for i in range(15):
         needForecost[tV] = i
         tV += 1
 print(newX.shape)
-print(newX)
-print(newY)  
 newXY = np.c_[newX,newY] 
 print(newXY.shape) 
-print(newXY)   
 print(needForecost)     
 
 # Part 1: Feature Normalization
 
 #X = np.matrix(newX)
 X = newX
-print(X)
-print(len(X))
-
 y = newY
 
 # Part 2: Gradient descent
@@ -73,31 +67,25 @@ print(a_ones)
 
 X = X.reshape(len(X),1)
 print(X.shape)
-#print(X)
 
 X_new = np.hstack((a_ones,X))
 print('print new X: ')
-#print(X_new)
-print(X_new.shape)
+
 theta = np.zeros((2,1))
 theta.shape = (len(theta),1)
-print('theta looks like this ')
-print(theta)
+print('theta looks like this ', theta)
+
 X_theta = np.dot(X_new[len(X)-1,:],theta)
-print('X multiply theta looks like this ')
-print(X_theta)
+print('X multiply theta looks like this ', X_theta)
 
 #calculate the cost by using the cost function 
 J = computeCost(X_new,y,theta)
-print('the final cost is: ')
-print(J)
+print('the final cost is: ', J)
 
 (theta,J_history) = gradientDescent(X_new,y,theta,alpha,num_iters)
 #(theta) = gradientDescent(X,y,theta,alpha,num_iters)
-print ("Theta computed from gradient descent:")
-print (theta)
-'''print ("J_history are:")
-print (J_history)'''
+print ("Theta computed from gradient descent: ", theta)
+print ("J_history are: ", J_history)
 
 # Part 3: Visualizing 
 
@@ -108,7 +96,6 @@ plt.xlim(-1, 15)
 plt.ylabel('y')
 plt.xlabel('X')
 plt.plot(X, np.dot(X_new,theta))
-#plt.legend('Training data', 'Linear regression')
 
 #Predict missing values for absent years
 predict = np.zeros(tV)
@@ -119,14 +106,12 @@ for i in range(tV):
     plt.plot(yearN,predict[i],'bx', markersize=10)
 print(newTable[1])
 #plot the predictions
-'''plt.plot(0,predict[0],'bx', markersize=10)
-plt.plot(3,predict[2],'bx', markersize=10)'''
 plt.show()
 
-'''
+# data output in .csv file
 import csv
 b = open('Item_Zone.csv','a') 
 a = csv.writer(b)
 a.writerows(Item_Zone)  
 b.close
-print('Finished')'''
+print('Finished')
