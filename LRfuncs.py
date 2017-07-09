@@ -7,7 +7,8 @@
 # edX online course Artificial Intelligence (AI) 
 https://courses.edx.org/courses/course-v1:ColumbiaX+CSMM.101x+1T2017/info
 '''
- 
+
+# functions 
 import numpy as np
 
 def featureNormalize(X):
